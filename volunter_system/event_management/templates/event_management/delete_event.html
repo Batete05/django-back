@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Event</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 40px;
+            color: #333;
+            font-size: 24px;
+        }
+
+        /* Main Container */
+        .container {
+            width: 50%;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-top: 40px;
+            border-radius: 8px;
+        }
+
+        .container a {
+            text-decoration: none;
+            color: #007bff;
+            font-size: 16px;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        .container a:hover {
+            text-decoration: underline;
+        }
+
+        /* Button Styling */
+        button {
+            padding: 10px 20px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #c0392b;
+        }
+
+        /* Form Styles */
+        form {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Are you sure you want to delete "{{ event.name }}"?</h1>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit">Confirm Delete</button>
+        </form>
+        <a href="{% url 'event_list' %}">Cancel</a>
+    </div>
+</body>
+</html>

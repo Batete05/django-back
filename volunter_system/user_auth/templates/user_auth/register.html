@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            width: 400px;
+            max-width: 90%;
+        }
+
+        h2 {
+            text-align: center;
+            color: #007bff;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        /* Form Styles */
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        input, select, textarea {
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        input:hover, select:hover, textarea:hover {
+            border-color: #007bff;
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.6);
+        }
+
+        /* Button Styles */
+        button {
+            padding: 12px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.4s ease;
+            letter-spacing: 1px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        /* Alert Messages */
+        .alert {
+            text-align: center;
+            font-size: 14px;
+            padding: 10px;
+            border-radius: 5px;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .alert.success {
+            background-color: #28a745;
+        }
+
+        .alert.error {
+            background-color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Alert Messages -->
+        {% for message in messages %}
+        <div class="alert {{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+
+        <h2>Register</h2>
+        
+        <!-- Registration Form -->
+        <form method="POST">
+            {% csrf_token %}
+            {% for field in form %}
+                <div>
+                    <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
+                    {{ field }}
+                    {% if field.errors %}
+                    <div style="color: #e74c3c; font-size: 12px; margin-top: 5px;">
+                        {{ field.errors }}
+                    </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            <button type="submit">Register</button>
+        </form>
+        <p style="text-align: center; margin-top: 15px; font-size: 14px; color: #555;">
+            Already have an account? 
+            <a href="{% url 'login' %}" style="color: #28a745; text-decoration: none; font-weight: bold;">
+                Login 
+            </a>
+        </p>
+    </div>
+</body>
+</html>

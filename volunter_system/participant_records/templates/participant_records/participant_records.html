@@ -1,0 +1,17 @@
+<!-- home/templates/home/homepage.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Participant_management</title>
+</head>
+<body>
+    <h1>{{ message }}</h1>
+    <nav>
+        <a href="{% url 'event_management' %}">Event_management</a>
+        <a href="{% url 'participant_records' %}">Participant_records</a>
+        <a href="{% url 'volunteer_management' %}">Volunter_management</a>
+        <!-- <a href="{% url 'event_management' %}">Event_management</a> -->
+    </nav>
+</body>
+</html>

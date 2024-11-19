@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteer Events</title>
+</head>
+<body>
+    <h1>Welcome, Volunteer!</h1>
+    <h2>Available Events</h2>
+
+    <ul>
+        {% for event in events %}
+            <li>
+                <h3>{{ event.name }}</h3>
+                <p>{{ event.description }}</p>
+                <p><strong>Date:</strong> {{ event.date }}</p>
+                <p><strong>Location:</strong> {{ event.location }}</p>
+                <a href="{% url 'volunteer_register_event' event.id %}">Volunteer for this Event</a>
+            </li>
+        {% empty %}
+            <p>No events are currently available.</p>
+        {% endfor %}
+    </ul>
+</body>
+</html>

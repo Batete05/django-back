@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Volunteer Profile</title>
+</head>
+<body>
+    <h1>{{ participant.user.username }}'s Profile</h1>
+    <p>Email: {{ participant.user.email }}</p>
+
+    <h2>Volunteering for the following events:</h2>
+    <ul>
+        {% for event in participant.events.all %}
+        <li>{{ event.name }} on {{ event.date }}</li>
+        {% endfor %}
+    </ul>
+
+    <p><a href="{% url 'event_list' %}">Back to Events</a></p>
+</body>
+</html>

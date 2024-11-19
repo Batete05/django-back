@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: auto;
+            padding: 40px;
+            background: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+
+        /* Alert Message Styles */
+        .alert {
+            font-size: 14px;
+            margin-bottom: 20px;
+            padding: 10px;
+            border-radius: 4px;
+            color: white;
+            text-align: center;
+        }
+
+        .alert.error {
+            background-color: #e74c3c;
+        }
+
+        .alert.success {
+            background-color: #28a745;
+        }
+
+        /* Form Styles */
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        input, select {
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        input:hover, select:hover {
+            border-color: #007bff;
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+        }
+
+        input:focus, select:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.6);
+        }
+
+        /* Button Styles */
+        button {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.4s ease;
+            letter-spacing: 1px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.5);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Login</h2>
+        
+        <!-- Alert Messages -->
+        {% for message in messages %}
+        <div class="alert {{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+
+        <!-- Login Form -->
+        <form method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+            <div>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div>
+                <label for="role">Role:</label>
+                <select id="role" name="role" required>
+                    <option value="volunteer">Volunteer</option>
+                    <option value="organizer">Organizer</option>
+                </select>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+
+        <p style="text-align: center; margin-top: 15px; font-size: 14px; color: #555;">
+            Don't have an account? 
+            <a href="{% url 'register' %}" style="color: #28a745; text-decoration: none; font-weight: bold;">
+                Create one
+            </a>
+        </p>
+        </div>
+</body>
+</html>
