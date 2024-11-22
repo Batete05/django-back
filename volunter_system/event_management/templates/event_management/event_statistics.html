@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Statistics</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Event Registration Statistics</h1>
+    <canvas id="eventChart" height="100px"></canvas>
+
+    <script>
+        // Parse the event data passed from Django
+        const eventData = JSON.parse('{{ event_data|escapejs }}');
+        console.log("Event Data", eventData)
+
+        // Extract the event names and participant counts
+        const eventNames = eventData.map(event => event['event']);
+        const participantCounts = eventData.map(event => event['participant_count']);
+        console.log(participantCounts);
+        
+
+        // Create the chart
+        const ctx = document.getElementById('eventChart').getContext('2d');
+        const eventChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: eventNames,
+                datasets: [{
+                    label: 'Volunteers',
+                    data: participantCounts,
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

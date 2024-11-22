@@ -8,7 +8,7 @@ class CustomUser(AbstractUser):
         ('volunteer', 'Volunteer'),
         ('organizer', 'Organizer'),
     ]
-    role= models.CharField(max_length=20, choices=ROLE_CHOICES, default='volunteer')
+    role= models.CharField(max_length=20, choices=ROLE_CHOICES, default='')
     
 
 

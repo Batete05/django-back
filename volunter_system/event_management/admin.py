@@ -5,4 +5,4 @@ from .models import Event
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
     list_display = ('name', 'organizer', 'date')
-    filter_horizontal = ('participants',)
+

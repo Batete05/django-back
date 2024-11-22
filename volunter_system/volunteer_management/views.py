@@ -3,6 +3,7 @@ from event_management.models import Event
 from django.http import HttpResponse
 from .models import Participant
 from django.contrib.auth.decorators import login_required
+from .forms import ParticipantDataForm
 
 def volunteer_management_view(request):
     return render(request, 'volunteer_management/volunteer_management.html', {'message': 'Welcome to the Volunter page activities Management page!'})
@@ -25,7 +26,7 @@ def event_details(request, event_id):
 
     # Check if the user is a participant
     try:
-        participant = Participant.objects.get(user=request.user)
+        participant = Participant.objects.filter(user=request.user, event=event).first()  # Get the first match or None
     except Participant.DoesNotExist:
         participant = None
 
@@ -34,6 +35,19 @@ def event_details(request, event_id):
         'event': event,
         'participant': participant,
     }
+
+    if request.method == 'POST':
+        form  = ParticipantDataForm({
+            'user' : request.user,
+            'event': event
+        })
+        print(form.errors)  # This will show you what went wrong
+        # print(form.is_valid())
+
+        if form.is_valid():
+            form.save()
+        
+        # form.save()
 
     return render(request, 'volunteer_management/event_details.html', context)
 

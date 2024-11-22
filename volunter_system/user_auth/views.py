@@ -10,7 +10,7 @@ class CustomUserCreationRole(UserCreationForm):
 
     class Meta:
         model = CustomUser
-        fields = ('username', 'email', 'pass                                word1', 'password2', 'role')
+        fields = ('username', 'email', 'password1', 'password2', 'role')
 
 def login_view(request):
     if request.method == 'POST':
